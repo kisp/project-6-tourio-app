@@ -7,7 +7,7 @@ export default async function handler(request, response) {
   let { id } = request.query;
   id = id.toLowerCase();
 
-  if (!/^[a-z0-9]{24}$/.test(id)) {
+  if (!/^[a-f0-9]{24}$/.test(id)) {
     return response.status(404).json({ status: "Not found" });
   }
 
@@ -29,6 +29,22 @@ export default async function handler(request, response) {
     }
 
     return response.status(200).json(place);
+  }
+
+  if (request.method === "PATCH") {
+    try {
+      const { name, description, location } = request.body;
+
+      const updatedPlace = await Place.findByIdAndUpdate(
+        id,
+        { name, description, location },
+        { new: true }
+      );
+
+      response.status(200).json(updatedPlace);
+    } catch (error) {
+      response.status(500).json({ error: "Internal server error" });
+    }
   }
 
   return response.status(404).json({ status: "Not found" });
