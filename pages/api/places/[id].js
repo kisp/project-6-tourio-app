@@ -1,5 +1,5 @@
-import dbConnect from "../../../../db/connect";
-import Place from "../../../../db/models/Place";
+import dbConnect from "../../../db/connect";
+import Place from "../../../db/models/Place";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -10,7 +10,7 @@ export default async function handler(request, response) {
       return;
     }
 
-    const place = await Place.findOne({ _id: id });
+    const place = await Place.findById(id);
 
     if (!place) {
       return response.status(404).json({ status: "Not found" });
