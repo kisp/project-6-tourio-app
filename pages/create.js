@@ -19,6 +19,10 @@ export default function CreatePlacePage() {
         "Content-Type": "application/json",
       },
     });
+
+    if (response.ok) {
+      router.push("/");
+    }
   }
 
   return (
