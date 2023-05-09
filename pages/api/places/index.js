@@ -4,6 +4,7 @@ import Place from "../../../db/models/Place";
 export default async function handler(request, response) {
   try {
     console.log("before dbConnect");
+    console.log("process.env.MONGODB_URI: ", process.env.MONGODB_URI);
     await dbConnect();
     console.log("after dbConnect");
 
