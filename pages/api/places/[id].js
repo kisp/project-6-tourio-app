@@ -18,4 +18,22 @@ export default async function handler(request, response) {
 
     response.status(200).json(place);
   }
+
+  if (request.method === "PATCH") {
+    try {
+      const { name, description, location } = request.body;
+
+      await dbConnect();
+
+      const updatedPlace = await Place.findByIdAndUpdate(
+        id,
+        { name, description, location },
+        { new: true }
+      );
+
+      response.status(200).json(updatedPlace);
+    } catch (error) {
+      response.status(500).json({ error: "Internal server error" });
+    }
+  }
 }
