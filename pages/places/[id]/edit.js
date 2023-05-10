@@ -21,7 +21,6 @@ export default function EditPage() {
       });
       router.push("/");
       const data = await res.json();
-      console.log("Place edited:", data);
     } catch (error) {
       console.error("Error editing place:", error);
     }

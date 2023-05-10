@@ -3,14 +3,10 @@ import Place from "../../../db/models/Place";
 
 export default async function handler(request, response) {
   try {
-    console.log("before dbConnect");
-    console.log("process.env.MONGODB_URI: ", process.env.MONGODB_URI);
     await dbConnect();
-    console.log("after dbConnect");
 
     if (request.method === "GET") {
       const places = await Place.find();
-      console.log("places.length: ", places.length);
       return response.status(200).json(places);
     }
 
